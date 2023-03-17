@@ -273,7 +273,7 @@ public class MongodbUtil {
 				builder.applyToSslSettings(sslSettingBuilder -> {
 					SSLContext sslContext = null;
 					try {
-						sslContext = SSLContext.getInstance("SSL");
+						sslContext = SSLContext.getInstance("TLSv1.2");
 					} catch (NoSuchAlgorithmException e) {
 						throw new RuntimeException(String.format("Create ssl context failed %s", e.getMessage()), e);
 					}

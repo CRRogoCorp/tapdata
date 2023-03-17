@@ -108,7 +108,7 @@ public class MongodbUtil extends BaseDatabaseUtil {
 				if (StringUtils.isNotEmpty(databaseUri) &&
 						(databaseUri.indexOf("tlsAllowInvalidCertificates=true") > 0 ||
 								databaseUri.indexOf("sslAllowInvalidCertificates=true") > 0)) {
-					SSLContext sslContext = SSLContext.getInstance("SSL");
+					SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
 					sslContext.init(null, new TrustManager[]{new X509TrustManager() {
 						@Override
 						public void checkClientTrusted(X509Certificate[] x509Certificates, String s) throws CertificateException {

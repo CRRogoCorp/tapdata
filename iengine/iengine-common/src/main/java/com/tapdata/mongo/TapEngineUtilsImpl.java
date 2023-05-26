@@ -1,6 +1,8 @@
 package com.tapdata.mongo;
 
 import com.tapdata.tm.sdk.util.CloudSignUtil;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.tapdata.entity.annotations.Implementation;
 import io.tapdata.modules.api.net.utils.TapEngineUtils;
 
@@ -29,7 +31,7 @@ public class TapEngineUtilsImpl implements TapEngineUtils {
 		if(CloudSignUtil.isNeedSign()) {
 			URL url;
 			try {
-				url = new URL(baseUrl);
+				url = Urls.create(baseUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			} catch (MalformedURLException e) {
 				throw new RuntimeException(e);
 			}
@@ -54,7 +56,7 @@ public class TapEngineUtilsImpl implements TapEngineUtils {
 			throw new IllegalArgumentException("wsPath doesn't contain \"engine\", wsPath " + wsPath);
 		String suffix = wsPath.substring(pos);
 		try {
-			URL url = new URL(loginUrl);
+			URL url = Urls.create(loginUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			String path = url.getPath();
 			int proxyPos = path.indexOf("api/proxy");
 			if(proxyPos < 0) {

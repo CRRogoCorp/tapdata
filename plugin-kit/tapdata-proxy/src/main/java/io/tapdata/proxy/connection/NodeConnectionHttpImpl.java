@@ -1,6 +1,8 @@
 package io.tapdata.proxy.connection;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.tapdata.entity.error.CoreException;
 import io.tapdata.entity.logger.TapLogger;
 import io.tapdata.entity.utils.DataMap;
@@ -215,7 +217,7 @@ public class NodeConnectionHttpImpl implements NodeConnection {
 	private NodeMessage post(String url, NodeMessage nodeMessage) throws IOException {
 		touch();
 		TapLogger.debug(TAG, "post url {} nodeMessage {}", url, nodeMessage);
-		URL theUrl = new URL(url);
+		URL theUrl = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		HttpURLConnection connection = (HttpURLConnection) theUrl.openConnection();
 		connection.setRequestMethod("POST");
 		connection.setConnectTimeout(10000);

@@ -10,6 +10,7 @@ import com.google.protobuf.util.JsonFormat;
 import com.tapdata.constant.UUIDGenerator;
 import com.tapdata.processor.dataflow.pb.DynamicProtoUtil;
 import com.tapdata.processor.dataflow.pb.PbModel;
+import java.security.SecureRandom;
 import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -355,7 +356,7 @@ public class CustomTcp {
 	 */
 	private static String getStringRandom(int length) {
 		String val = "";
-		Random random = new Random();
+		Random random = new SecureRandom();
 		//参数length，表示生成几位随机数
 		for (int i = 0; i < length; i++) {
 			String charOrNum = random.nextInt(2) % 2 == 0 ? "char" : "num";

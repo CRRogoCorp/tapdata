@@ -9,6 +9,7 @@ import com.tapdata.tm.config.security.UserDetail;
 import com.tapdata.tm.file.service.FileService;
 import com.tapdata.tm.task.service.TaskService;
 import com.tapdata.tm.utils.Lists;
+import io.github.pixee.security.Filenames;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
@@ -49,7 +50,7 @@ public class CustomNodeService extends BaseService<CustomNodeDto, CustomNodeEnti
   public String upload(MultipartFile file, UserDetail userDetail){
 
     try{
-        ObjectId objectId =fileService1.storeFile(file.getInputStream(),file.getOriginalFilename(),null,new HashMap<>());
+        ObjectId objectId =fileService1.storeFile(file.getInputStream(),Filenames.toSimpleFileName(file.getOriginalFilename()),null,new HashMap<>());
         if (objectId != null) {
           return objectId.toHexString();
         }

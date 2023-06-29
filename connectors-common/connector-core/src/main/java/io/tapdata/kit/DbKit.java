@@ -1,5 +1,6 @@
 package io.tapdata.kit;
 
+import io.github.pixee.security.BoundedLineReader;
 import io.tapdata.entity.simplify.TapSimplify;
 import io.tapdata.entity.utils.DataMap;
 
@@ -129,11 +130,11 @@ public class DbKit {
     public static String clobToString(Clob clob) {
         String re = "";
         try (Reader is = clob.getCharacterStream(); BufferedReader br = new BufferedReader(is)) {
-            String s = br.readLine();
+            String s = BoundedLineReader.readLine(br, 1000000);
             StringBuilder sb = new StringBuilder();
             while (s != null) {
                 sb.append(s);
-                s = br.readLine();
+                s = BoundedLineReader.readLine(br, 1000000);
             }
             re = sb.toString();
         } catch (Exception e) {

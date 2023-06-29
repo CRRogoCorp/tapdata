@@ -1,5 +1,6 @@
 package io.tapdata.mongodb.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import io.tapdata.kit.EmptyKit;
 import org.apache.commons.collections4.CollectionUtils;
 
@@ -97,12 +98,12 @@ public class SSLUtil {
 
   public static String retrivePrivateKey(File privateKeyPem) throws IOException {
     try (final BufferedReader r = new BufferedReader(new FileReader(privateKeyPem))) {
-      String s = r.readLine();
+      String s = BoundedLineReader.readLine(r, 1000000);
       while (s != null) {
         if (s.contains("BEGIN") && s.contains("PRIVATE KEY")) {
           break;
         }
-        s = r.readLine();
+        s = BoundedLineReader.readLine(r, 1000000);
       }
 
       final StringBuffer b = new StringBuffer();
@@ -112,7 +113,7 @@ public class SSLUtil {
           break;
         }
         b.append(s);
-        s = r.readLine();
+        s = BoundedLineReader.readLine(r, 1000000);
       }
 
       return b.toString();
@@ -123,12 +124,12 @@ public class SSLUtil {
     List<String> result = new ArrayList<>();
 
     try (final BufferedReader r = new BufferedReader(new FileReader(certificatePem))) {
-      String s = r.readLine();
+      String s = BoundedLineReader.readLine(r, 1000000);
       while (s != null) {
         if (s.contains("BEGIN CERTIFICATE")) {
           break;
         }
-        s = r.readLine();
+        s = BoundedLineReader.readLine(r, 1000000);
       }
       StringBuffer b = new StringBuffer();
       while (s != null) {
@@ -141,7 +142,7 @@ public class SSLUtil {
             b.append(s);
           }
         }
-        s = r.readLine();
+        s = BoundedLineReader.readLine(r, 1000000);
       }
 
       return result;

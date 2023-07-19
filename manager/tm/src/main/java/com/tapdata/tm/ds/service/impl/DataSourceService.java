@@ -57,6 +57,8 @@ import com.tapdata.tm.task.service.TaskService;
 import com.tapdata.tm.utils.*;
 import com.tapdata.tm.worker.entity.Worker;
 import com.tapdata.tm.worker.service.WorkerService;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.tapdata.entity.mapping.DefaultExpressionMatchingMap;
 import io.tapdata.entity.schema.TapTable;
 import io.tapdata.entity.utils.InstanceFactory;
@@ -776,7 +778,7 @@ public class DataSourceService extends BaseService<DataSourceConnectionDto, Data
 					String keyValue = String.valueOf(keyObjOfCopyConnectionConfig);
 					URL url = null;
 					try {
-						url = new URL(keyValue);
+						url = Urls.create(keyValue, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 					} catch (Throwable ignored) {
 					}
 					if (null == keyValue || !keyValue.contains("/api/proxy/callback/") || url == null) {

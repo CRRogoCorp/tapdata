@@ -2,6 +2,8 @@ package io.tapdata.wsclient.utils;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -114,7 +116,7 @@ public class HttpUtils {
     }
 
     private static HttpURLConnection getUrlConnection(String url, String method, Map<String, String> headers) throws IOException {
-        URL theUrl = new URL(url);
+        URL theUrl = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         HttpURLConnection connection = (HttpURLConnection) theUrl.openConnection();
         connection.setRequestMethod(method);
         if(headers != null) {

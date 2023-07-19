@@ -12,6 +12,7 @@ import com.tapdata.tm.base.exception.BizException;
 import com.tapdata.tm.utils.FunctionUtils;
 import com.tapdata.tm.utils.GZIPUtil;
 import com.tapdata.tm.utils.ThrowableUtils;
+import io.github.pixee.security.Newlines;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.compress.utils.IOUtils;
@@ -173,7 +174,7 @@ public class FileService {
             }
             if (flag) {
                 log.info("图片类型,进入预览");
-                response.setHeader("Content-disposition", "inline; filename=" + fileName);
+                response.setHeader("Content-disposition", Newlines.stripAll("inline; filename=" + fileName));
                 FunctionUtils.isTureOrFalse(file.getFilename().contains(".svg")).trueOrFalseHandle(
                         () -> response.setContentType("image/svg+xml"),
                         () -> response.setContentType("image/jpeg"));
@@ -185,8 +186,8 @@ public class FileService {
                 log.info("非图片类型,进入下载");
                 //转成GridFsResource类取文件类型
                 response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
-                response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-                response.setHeader("Content-Length", String.valueOf(file.getLength()));
+                response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + fileName));
+                response.setHeader("Content-Length", Newlines.stripAll(String.valueOf(file.getLength())));
 
                 gridFSBucket.downloadToStream(fileId, out);
                 out.flush();
@@ -206,7 +207,7 @@ public class FileService {
             }
             String codeFileName = URLEncoder.encode(fileName, "UTF-8");
 
-            response.setHeader("Content-disposition", "inline; filename=" + codeFileName);
+            response.setHeader("Content-disposition", Newlines.stripAll("inline; filename=" + codeFileName));
             response.setContentType(MediaType.APPLICATION_OCTET_STREAM_VALUE);
             // 不进行压缩的文件大小，单位为bit
             byte[] bytes = json.getBytes(StandardCharsets.UTF_8);

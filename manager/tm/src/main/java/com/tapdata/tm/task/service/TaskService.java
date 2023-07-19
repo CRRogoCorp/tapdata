@@ -73,6 +73,7 @@ import com.tapdata.tm.worker.entity.Worker;
 import com.tapdata.tm.worker.service.WorkerService;
 import com.tapdata.tm.worker.vo.CalculationEngineVo;
 import com.tapdata.tm.ws.enums.MessageType;
+import io.github.pixee.security.Filenames;
 import io.tapdata.common.sample.request.Sample;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
@@ -2078,7 +2079,7 @@ public class TaskService extends BaseService<TaskDto, TaskEntity, ObjectId, Task
         byte[] bytes;
         List<TaskUpAndLoadDto> taskUpAndLoadDtos;
 
-        if (!Objects.requireNonNull(multipartFile.getOriginalFilename()).endsWith("json.gz")) {
+        if (!Objects.requireNonNull(Filenames.toSimpleFileName(multipartFile.getOriginalFilename())).endsWith("json.gz")) {
             //不支持其他的格式文件
             throw new BizException("Task.ImportFormatError");
         }

@@ -1,6 +1,8 @@
 package io.tapdata.wsclient.modules.imclient.impls.websocket;
 
 import com.alibaba.fastjson.JSONObject;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.netty.channel.*;
 import io.tapdata.entity.error.CoreException;
 import io.tapdata.entity.logger.TapLogger;
@@ -199,7 +201,7 @@ public class WebsocketPushChannel extends PushChannel {
         path = wsPath;
 
         try {
-            URL url = new URL(baseUrl);
+            URL url = Urls.create(baseUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             if(protocol == null) {
                 protocol = (url.getProtocol().equals("https") ? "wss" : "ws");
             }

@@ -39,7 +39,7 @@ public class ObjectSerializableImpl implements ObjectSerializable {
 		if(obj == null)
 			return null;
 		byte[] data = null;
-		if(obj.getClass().getName().equals("org.bson.Document")) {
+		if("org.bson.Document".equals(obj.getClass().getName())) {
 			return null;
 		} else if(obj instanceof Map) {
 			Map<?, ?> map = (Map<?, ?>) obj;

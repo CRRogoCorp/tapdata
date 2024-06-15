@@ -3,6 +3,8 @@ package com.tapdata.processor.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tapdata.constant.JSONUtil;
 import com.tapdata.entity.RestURLInfo;
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -188,7 +190,7 @@ public class RestUtil {
 	}
 
 	public static Map<String, String> splitQuery(String urlString) throws UnsupportedEncodingException, MalformedURLException {
-		URL url = new URL(urlString);
+		URL url = Urls.create(urlString, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		Map<String, String> query_pairs = new LinkedHashMap();
 		String query = url.getQuery();
 		String[] pairs = query.split("&");

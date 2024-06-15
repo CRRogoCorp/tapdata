@@ -39,9 +39,9 @@ public class TapEngineUtilsImpl implements TapEngineUtils {
 			if(port > 0) {
 				return port;
 			} else {
-				if(url.getProtocol().equals("http")) {
+				if("http".equals(url.getProtocol())) {
 					return 80;
-				} else if(url.getProtocol().equals("https")) {
+				} else if("https".equals(url.getProtocol())) {
 					return 443;
 				}
 			}

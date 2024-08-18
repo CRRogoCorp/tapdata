@@ -3,6 +3,7 @@ package com.tapdata.tm.monitor.schduler;
 import com.tapdata.tm.monitor.constant.Granularity;
 import com.tapdata.tm.monitor.service.MeasureLockService;
 import com.tapdata.tm.monitor.service.MeasurementServiceV2;
+import java.security.SecureRandom;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -25,7 +26,7 @@ public class AggregationScheduleV2 {
     MeasurementServiceV2 measurementServiceV2;
 
     private final String processName = ManagementFactory.getRuntimeMXBean().getName();
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     @Async
     @Scheduled(cron = "5 * * * * ?")  // xx:xx:05 at every minute

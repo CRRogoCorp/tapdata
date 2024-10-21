@@ -8,6 +8,7 @@ import com.tapdata.tm.monitoringlogs.param.MonitoringLogExportParam;
 import com.tapdata.tm.monitoringlogs.param.MonitoringLogQueryParam;
 import com.tapdata.tm.monitoringlogs.service.MonitoringLogsService;
 import com.tapdata.tm.monitoringlogs.vo.MonitoringLogCountVo;
+import io.github.pixee.security.Newlines;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -87,7 +88,7 @@ public class MonitoringLogsController extends BaseController {
         String filename = param.getTaskId() +"-" + date + "-log";
 
         response.setContentType("application/zip");
-        response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + ".zip\"");
+        response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=\"" + filename + ".zip\""));
         ZipOutputStream zipOutputStream = new ZipOutputStream(response.getOutputStream());
         zipOutputStream.putNextEntry(new ZipEntry(filename + ".log"));
         try {

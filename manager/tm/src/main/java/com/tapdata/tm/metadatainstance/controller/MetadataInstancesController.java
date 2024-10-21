@@ -21,6 +21,7 @@ import com.tapdata.tm.modules.service.ModulesService;
 import com.tapdata.tm.utils.GZIPUtil;
 import com.tapdata.tm.utils.MetadataUtil;
 import com.tapdata.tm.utils.MongoUtils;
+import io.github.pixee.security.Newlines;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -611,7 +612,7 @@ public class MetadataInstancesController extends BaseController {
         String downloadContent = JsonUtil.toJsonUseJackson(data);
 
         String fileName = type + DateUtil.today() + ".gz";
-        response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
+        response.setHeader("Content-Disposition", Newlines.stripAll("attachment; filename=" + fileName));
         ServletOutputStream outputStream = null;
         try {
             outputStream = response.getOutputStream();

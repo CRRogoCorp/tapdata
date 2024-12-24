@@ -21,6 +21,8 @@
  */
 package com.tapdata.tm.sdk.test;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.junit.Ignore;
 
 import javax.net.ssl.*;
@@ -832,7 +834,7 @@ public class HttpRequest {
 			throws HttpRequestException {
 		URL parsed;
 		try {
-			parsed = new URL(url.toString());
+			parsed = Urls.create(url.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		} catch (IOException e) {
 			throw new HttpRequestException(e);
 		}
@@ -1428,7 +1430,7 @@ public class HttpRequest {
 	public HttpRequest(final CharSequence url, final String method)
 			throws HttpRequestException {
 		try {
-			this.url = new URL(url.toString());
+			this.url = Urls.create(url.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		} catch (MalformedURLException e) {
 			throw new HttpRequestException(e);
 		}

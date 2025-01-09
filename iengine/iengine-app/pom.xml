@@ -228,7 +228,11 @@
             <groupId>com.tapdata</groupId>
             <artifactId>hazelcast-lib</artifactId>
         </dependency>
-    </dependencies>
+  <dependency>
+   <groupId>io.github.pixee</groupId>
+   <artifactId>java-security-toolkit</artifactId>
+  </dependency>
+ </dependencies>
 
     <build>
         <finalName>ie</finalName>

@@ -1,5 +1,6 @@
 package websocket;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -84,7 +85,7 @@ public class WebSocketTest {
 		try {
 
 			BufferedReader bufferReader = new BufferedReader(new InputStreamReader(System.in));
-			String line = bufferReader.readLine();
+			String line = BoundedLineReader.readLine(bufferReader, 5_000_000);
 
 			threads.forEach(Thread::interrupt);
 

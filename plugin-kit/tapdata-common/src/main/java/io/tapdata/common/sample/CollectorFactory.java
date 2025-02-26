@@ -6,6 +6,7 @@ import io.tapdata.common.sample.request.*;
 import io.tapdata.common.sample.sampler.AverageSampler;
 import io.tapdata.common.sample.sampler.CounterSampler;
 import io.tapdata.common.sample.sampler.ResetCounterSampler;
+import java.security.SecureRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -488,7 +489,7 @@ public class CollectorFactory {
     }
 
     public static void main(String... args) {
-        Random random = new Random();
+        Random random = new SecureRandom();
         CollectorFactory.getInstance().start(
                 (bulkRequest) -> System.out.println(bulkRequest.toString()),
                 (pointValues, tags) -> System.out.println(pointValues.toString() + tags.toString())

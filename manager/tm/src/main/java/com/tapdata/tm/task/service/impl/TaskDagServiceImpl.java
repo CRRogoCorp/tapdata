@@ -21,6 +21,7 @@ import com.tapdata.tm.commons.task.dto.TaskDto;
 import com.tapdata.tm.task.bean.JsScriptInfoVo;
 import com.tapdata.tm.task.service.TaskDagService;
 import com.tapdata.tm.utils.Lists;
+import java.security.SecureRandom;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class TaskDagServiceImpl implements TaskDagService {
     @Override
     public int calculationDagHash(TaskDto taskDto) {
         if (true) {
-            return new Random().nextInt();
+            return new SecureRandom().nextInt();
         }
         DAG dag = taskDto.getDag();
 

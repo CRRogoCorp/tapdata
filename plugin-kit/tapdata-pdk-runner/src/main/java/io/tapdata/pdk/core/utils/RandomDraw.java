@@ -1,9 +1,10 @@
 package io.tapdata.pdk.core.utils;
 
+import java.security.SecureRandom;
 import java.util.Random;
 
 public class RandomDraw {
-    private Random random = new Random();
+    private Random random = new SecureRandom();
     private int[] array;
 
     public RandomDraw(int count) {

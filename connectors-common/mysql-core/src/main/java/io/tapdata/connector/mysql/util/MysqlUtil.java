@@ -1,5 +1,6 @@
 package io.tapdata.connector.mysql.util;
 
+import java.security.SecureRandom;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.Duration;
@@ -37,7 +38,7 @@ public class MysqlUtil extends JdbcUtil {
 	public static int randomServerId() {
 		int lowestServerId = 5400;
 		int highestServerId = Integer.MAX_VALUE;
-		return lowestServerId + new Random().nextInt(highestServerId - lowestServerId);
+		return lowestServerId + new SecureRandom().nextInt(highestServerId - lowestServerId);
 	}
 
 	public static String fixDataType(String dataType, String version) {

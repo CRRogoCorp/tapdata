@@ -1,5 +1,6 @@
 package io.tapdata.pdk.core.api.impl;
 
+import io.github.pixee.security.ObjectInputFilters;
 import io.tapdata.entity.annotations.Bean;
 import io.tapdata.entity.annotations.Implementation;
 import io.tapdata.entity.schema.TapTable;
@@ -450,6 +451,7 @@ public class ObjectSerializableImpl implements ObjectSerializable {
 			}
 			Object obj;
 			try(ObjectInputStream oos = new ObjectInputStream(new ByteArrayInputStream(theData))) {
+				ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 				obj = oos.readObject();
 			} catch (ClassNotFoundException e) {
 //						e.printStackTrace();

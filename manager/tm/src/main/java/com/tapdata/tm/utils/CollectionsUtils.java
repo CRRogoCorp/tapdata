@@ -1,6 +1,7 @@
 package com.tapdata.tm.utils;
 
 import com.alibaba.fastjson.JSONObject;
+import io.github.pixee.security.ObjectInputFilters;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.bson.conversions.Bson;
@@ -45,6 +46,7 @@ public class CollectionsUtils {
             out.writeObject(src);
             ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
             ObjectInputStream in = new ObjectInputStream(byteIn);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             List<T> dest = (List<T>) in.readObject();
             return dest;
         } catch (Exception e) {

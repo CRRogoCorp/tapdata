@@ -159,7 +159,8 @@
 
         <!-- lombok -->
         <lombok.version>1.18.20</lombok.version>
-    </properties>
+  <versions.java-security-toolkit>1.2.1</versions.java-security-toolkit>
+ </properties>
 
     <modules>
         <module>iengine-app</module>
@@ -869,8 +870,13 @@
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
             </dependency>
-
-        </dependencies>
+   <dependency>
+    <groupId>io.github.pixee</groupId>
+    <artifactId>java-security-toolkit</artifactId>
+    
+    <version>${versions.java-security-toolkit}</version>
+   </dependency>
+  </dependencies>
     </dependencyManagement>
 
     <repositories>

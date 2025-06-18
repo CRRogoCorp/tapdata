@@ -2,6 +2,7 @@ package com.tapdata.tm.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.tapdata.manager.common.utils.JsonUtil;
+import io.github.pixee.security.ObjectInputFilters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,6 +64,7 @@ public class BeanUtil {
             out.writeObject(src);
             ByteArrayInputStream byteIn = new ByteArrayInputStream(byteOut.toByteArray());
             ObjectInputStream in = new ObjectInputStream(byteIn);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             List<T> dest = (List<T>) in.readObject();
             return dest;
         } catch (Exception e) {

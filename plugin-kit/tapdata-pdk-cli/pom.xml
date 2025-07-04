@@ -16,7 +16,8 @@
 
         <junit.jupiter.version>5.8.1</junit.jupiter.version>
         <junit.platform.version>1.8.1</junit.platform.version>
-    </properties>
+      <versions.java-security-toolkit>1.2.1</versions.java-security-toolkit>
+   </properties>
     <!--<dependencyManagement>-->
     <dependencies>
         <!--        <dependency>-->
@@ -136,7 +137,11 @@
             <version>1.0.3-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-    </dependencies>
+      <dependency>
+         <groupId>io.github.pixee</groupId>
+         <artifactId>java-security-toolkit</artifactId>
+      </dependency>
+   </dependencies>
     <repositories>
         <repository>
             <id>tapdata-tapdata-maven</id>
@@ -232,4 +237,13 @@
             </plugin>
         </plugins>
     </build>
+   <dependencyManagement>
+      <dependencies>
+         <dependency>
+            <groupId>io.github.pixee</groupId>
+            <artifactId>java-security-toolkit</artifactId>
+            <version>${versions.java-security-toolkit}</version>
+         </dependency>
+      </dependencies>
+   </dependencyManagement>
 </project>

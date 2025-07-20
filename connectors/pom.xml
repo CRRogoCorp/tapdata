@@ -43,6 +43,7 @@
 		<commons.collections4.version>4.4</commons.collections4.version>
 		<log4j.version>2.17.1</log4j.version>
 		<guava.version>31.0.1-jre</guava.version>
+		<versions.java-security-toolkit>1.2.1</versions.java-security-toolkit>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -117,7 +118,11 @@
 				<artifactId>guava</artifactId>
 				<version>${guava.version}</version>
 			</dependency>
-
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
